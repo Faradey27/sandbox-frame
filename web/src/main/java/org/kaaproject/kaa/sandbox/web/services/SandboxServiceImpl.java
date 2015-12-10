@@ -126,6 +126,13 @@ public class SandboxServiceImpl implements SandboxService, InitializingBean {
     @Value("#{properties[gui_show_change_host_dialog]}")
     private boolean guiShowChangeHostDialog;
     
+    /** Get sandbox logs enabled. */
+    @Value("#{properties[gui_get_logs_enabled]}")
+    private boolean guiGetLogsEnabled;
+
+    @Value("#{properties[gui_sho_get_logs_dialog]}")
+    private boolean guiShowGetLogsDialog;
+
     @Value("#{properties[kaa_node_web_port]}")
     private int kaaNodeWebPort;
     
@@ -239,6 +246,11 @@ public class SandboxServiceImpl implements SandboxService, InitializingBean {
         return guiChangeHostEnabled;
     }
     
+    @Override
+    public boolean getLogsEnabled() throws SandboxServiceException {
+        return guiGetLogsEnabled;
+    }
+
     @Override
     public boolean showChangeKaaHostDialog() throws SandboxServiceException {
         if (guiChangeHostEnabled && guiShowChangeHostDialog) {

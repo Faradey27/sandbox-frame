@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package org.kaaproject.kaa.sandbox.web.client.mvp.place;
+package org.kaaproject.kaa.sandbox.web.client.mvp.view;
 
-import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.place.shared.WithTokenizers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 
-@WithTokenizers({MainPlace.Tokenizer.class,
-    ProjectPlace.Tokenizer.class,
-    ChangeKaaHostPlace.Tokenizer.class,
-    GetLogsPlace.Tokenizer.class})
-public interface SandboxPlaceHistoryMapper extends PlaceHistoryMapper
-{
+public interface GetLogsView extends BaseView {
+
+    HasClickHandlers getGetLogsButton();
+
+    void setGetLogsEnabled(Boolean enabled);
 }

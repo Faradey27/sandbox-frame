@@ -31,7 +31,8 @@ public class Analytics {
 	public static final String GOTO_AVRO_UI_SANDBOX_ACTION = "Goto Avro UI Sandbox";
 	
 	public static final String CHANGE_KAA_HOST_ACTION = "Change Kaa host/IP";
-	
+//	public static final String GET_LOGS_ACTION = "Get sandbox logs";
+
 	private static boolean inited = false;
 	
 	public static void initGA(String trackingId, String userId) {

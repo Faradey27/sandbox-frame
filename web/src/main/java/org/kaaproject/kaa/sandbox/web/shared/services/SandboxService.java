@@ -35,6 +35,8 @@ public interface SandboxService extends RemoteService {
 
     public boolean changeKaaHostEnabled() throws SandboxServiceException;
     
+    public boolean getLogsEnabled() throws SandboxServiceException;
+
     public boolean showChangeKaaHostDialog() throws SandboxServiceException;
     
     public void changeKaaHostDialogShown() throws SandboxServiceException;

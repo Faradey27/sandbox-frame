@@ -51,27 +51,32 @@ public class HeaderMenuItems extends HorizontalPanel {
         add(collapsedMenu);
     }
     
-    public void addMenuItem(String text,
-            final ActionMenuItemListener listener) {
-        
-        ActionsLabel item = new ActionsLabel(text, false);
+    public void addMenuItem(String text, final ActionMenuItemListener listener) {
+        addMenuItem(text, listener, false);
+    }
+
+    public ActionsLabel addMenuItem(String text, final ActionMenuItemListener listener, boolean extensible) {
+
+        ActionsLabel item = new ActionsLabel(text, extensible);
         item.addStyleName(Utils.sandboxStyle.button());
         items.add(item);
-        
+
         registrations.add(item.addClickHandler(new ClickHandler() {
-            
+
             @Override
             public void onClick(ClickEvent event) {
                 listener.onMenuItemSelected();
             }
         }));
-        
+
         item.setVisible(!isCollapsed);
         add(item);
-        
+
         collapsedMenu.addMenuItem(text, listener);
-        
+
         updateStyles();
+
+        return item;
     }
     
     private void updateStyles() {
