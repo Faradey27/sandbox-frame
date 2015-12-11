@@ -16,18 +16,17 @@
 
 package org.kaaproject.kaa.sandbox.web.client.mvp.view.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.kaaproject.kaa.sandbox.web.client.mvp.view.widget.ActionsLabel.ActionMenuItemListener;
-import org.kaaproject.kaa.sandbox.web.client.util.Utils;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import org.kaaproject.kaa.sandbox.web.client.mvp.view.widget.ActionsLabel.ActionMenuItemListener;
+import org.kaaproject.kaa.sandbox.web.client.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeaderMenuItems extends HorizontalPanel {
     
@@ -52,10 +51,10 @@ public class HeaderMenuItems extends HorizontalPanel {
     }
     
     public void addMenuItem(String text, final ActionMenuItemListener listener) {
-        addMenuItem(text, listener, false);
+        addMenuItem(text, false, listener);
     }
 
-    public ActionsLabel addMenuItem(String text, final ActionMenuItemListener listener, boolean extensible) {
+    public ActionsLabel addMenuItem(String text, boolean extensible, final ActionMenuItemListener listener) {
 
         ActionsLabel item = new ActionsLabel(text, extensible);
         item.addStyleName(Utils.sandboxStyle.button());

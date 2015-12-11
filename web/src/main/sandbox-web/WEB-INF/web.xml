@@ -76,8 +76,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>getLogsServlet</servlet-name>
-        <servlet-class>org.kaaproject.kaa.sandbox.web.servlet.GetLogsServlet</servlet-class>
+        <servlet-name>logsServlet</servlet-name>
+        <servlet-class>org.kaaproject.kaa.sandbox.web.servlet.LogsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -101,8 +101,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>getLogsServlet</servlet-name>
-        <url-pattern>/sandbox/servlet/getLogsServlet</url-pattern>
+        <servlet-name>logsServlet</servlet-name>
+        <url-pattern>/sandbox/servlet/logsServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->

@@ -18,7 +18,7 @@ package org.kaaproject.kaa.sandbox.web.client.mvp.view;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
-public interface GetLogsView extends BaseView {
+public interface LogsView extends BaseView {
 
     HasClickHandlers getGetLogsButton();
 

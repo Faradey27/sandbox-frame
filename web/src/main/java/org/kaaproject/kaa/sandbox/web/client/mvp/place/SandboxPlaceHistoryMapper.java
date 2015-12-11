@@ -22,7 +22,7 @@ import com.google.gwt.place.shared.WithTokenizers;
 @WithTokenizers({MainPlace.Tokenizer.class,
     ProjectPlace.Tokenizer.class,
     ChangeKaaHostPlace.Tokenizer.class,
-    GetLogsPlace.Tokenizer.class})
+    LogsPlace.Tokenizer.class})
 public interface SandboxPlaceHistoryMapper extends PlaceHistoryMapper
 {
 }

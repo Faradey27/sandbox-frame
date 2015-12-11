@@ -16,21 +16,23 @@
 
 package org.kaaproject.kaa.sandbox.web.client.mvp.activity;
 
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.PopupPanel;
 import org.kaaproject.avro.ui.gwt.client.util.BusyAsyncCallback;
 import org.kaaproject.kaa.sandbox.web.client.Sandbox;
 import org.kaaproject.kaa.sandbox.web.client.mvp.ClientFactory;
 import org.kaaproject.kaa.sandbox.web.client.mvp.place.ChangeKaaHostPlace;
-import org.kaaproject.kaa.sandbox.web.client.mvp.place.GetLogsPlace;
+import org.kaaproject.kaa.sandbox.web.client.mvp.place.LogsPlace;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.HeaderView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.widget.ActionsLabel;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.widget.ActionsLabel.ActionMenuItemListener;
 import org.kaaproject.kaa.sandbox.web.client.util.Analytics;
 import org.kaaproject.kaa.sandbox.web.client.util.Utils;
-
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HeaderActivity extends AbstractActivity {
 
@@ -81,10 +83,13 @@ public class HeaderActivity extends AbstractActivity {
             }
         });
 
-        subMenuItem = headerView.getHeaderMenuItems().addMenuItem(Utils.constants.settings(), new ActionMenuItemListener() {
+        subMenuItem = headerView.getHeaderMenuItems().addMenuItem(Utils.constants.settings(), true,
+                new ActionMenuItemListener() {
             @Override
-            public void onMenuItemSelected() {}
-        }, true);
+            public void onMenuItemSelected() {
+                onSubmenuClick();
+            }
+        });
 
         Sandbox.getSandboxService().changeKaaHostEnabled(new BusyAsyncCallback<Boolean>() {
             @Override
@@ -115,7 +120,7 @@ public class HeaderActivity extends AbstractActivity {
                     subMenuItem.addMenuItem(Utils.constants.getSandboxLogs(), new ActionMenuItemListener() {
                         @Override
                         public void onMenuItemSelected() {
-                            clientFactory.getPlaceController().goTo(new GetLogsPlace(place));
+                            clientFactory.getPlaceController().goTo(new LogsPlace(place));
                         }
                     });
                 }
@@ -135,6 +140,26 @@ public class HeaderActivity extends AbstractActivity {
                 }
             }
         });
+    }
+
+    /*TODO: try to avoid this...*/
+    private void onSubmenuClick() {
+        final PopupPanel popup = subMenuItem.getActionsPopup();
+        if (!popup.isShowing() && !subMenuItem.isVisible()) {
+
+            final Element parent = headerView.getHeaderMenuItems().getElement();
+            popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+                public void setPosition(int offsetWidth, int offsetHeight) {
+                    int left = parent.getAbsoluteLeft();
+                    int top = parent.getAbsoluteTop() + parent.getOffsetHeight() + 2;
+                    if (left + popup.getOffsetWidth() > Window .getClientWidth()) {
+                        left = parent.getAbsoluteRight() - popup.getOffsetWidth();
+                    }
+                    popup.setPopupPosition(left, top);
+                }
+            });
+            popup.show();
+        }
     }
 
     private void gotoKaaAdminWeb() {

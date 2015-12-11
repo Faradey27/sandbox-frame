@@ -21,35 +21,36 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import org.kaaproject.kaa.sandbox.web.client.mvp.view.GetLogsView;
+import org.kaaproject.kaa.sandbox.web.client.mvp.view.LogsView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.base.BaseViewImpl;
 import org.kaaproject.kaa.sandbox.web.client.util.Utils;
 
-public class GetLogsViewImpl extends BaseViewImpl implements GetLogsView {
+public class LogsViewImpl extends BaseViewImpl implements LogsView {
 
     private VerticalPanel getLogsPanel;
     private Button getLogsButton;
 
-    public GetLogsViewImpl() {
+    public LogsViewImpl() {
         super(true);
         setBackEnabled(true);
     }
 
     @Override
     protected String getViewTitle() {
-        return "Sandbox logs";
+        return Utils.constants.sandboxLogs();
     }
 
     @Override
     protected void initCenterPanel() {
 
         getLogsPanel = new VerticalPanel();
-        HTML getLogsLabel = new HTML("Here you can download sandbox logs!");
+        getLogsPanel.getElement().getStyle().setPaddingTop(20, Style.Unit.PX);
+        HTML getLogsLabel = new HTML(Utils.messages.getLogsMessage());
         getLogsLabel.addStyleName(Utils.sandboxStyle.descriptionLabel());
         getLogsLabel.getElement().getStyle().setPaddingBottom(20, Style.Unit.PX);
         getLogsPanel.add(getLogsLabel);
 
-        getLogsButton = new Button("Get logs");
+        getLogsButton = new Button(Utils.constants.getLogs());
         getLogsPanel.add(getLogsButton);
 
         detailsPanel.add(getLogsPanel);
@@ -70,6 +71,5 @@ public class GetLogsViewImpl extends BaseViewImpl implements GetLogsView {
     public void setGetLogsEnabled(Boolean enabled) {
         getLogsPanel.setVisible(enabled);
     }
-
 
 }

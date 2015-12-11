@@ -16,8 +16,6 @@
 
 package org.kaaproject.kaa.sandbox.web.client.mvp.view.widget;
 
-import org.kaaproject.kaa.sandbox.web.client.util.Utils;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Unit;
@@ -30,7 +28,6 @@ import com.google.gwt.safecss.shared.SafeStyles;
 import com.google.gwt.safecss.shared.SafeStylesBuilder;
 import com.google.gwt.safecss.shared.SafeStylesUtils;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates.Template;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.uibinder.client.UiConstructor;
@@ -41,6 +38,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import org.kaaproject.kaa.sandbox.web.client.util.Utils;
 
 public class ActionsLabel extends Label {
 
@@ -163,6 +161,10 @@ public class ActionsLabel extends Label {
 
     public void clearItems() {
         menu.clearItems();
+    }
+
+    public PopupPanel getActionsPopup() {
+        return actionsPopup;
     }
 
     public static interface ActionMenuItemListener {

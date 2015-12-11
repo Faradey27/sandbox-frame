@@ -20,13 +20,13 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 import com.google.gwt.place.shared.Prefix;
 
-public class GetLogsPlace extends Place{
+public class LogsPlace extends Place{
 
     private Place previousPlace;
 
-    public GetLogsPlace() {}
+    public LogsPlace() {}
 
-    public GetLogsPlace(Place previousPlace) {
+    public LogsPlace(Place previousPlace) {
         this.previousPlace = previousPlace;
     }
 
@@ -37,16 +37,16 @@ public class GetLogsPlace extends Place{
         return previousPlace;
     }
 
-    @Prefix(value = "getLogs")
-    public static class Tokenizer implements PlaceTokenizer<GetLogsPlace> {
+    @Prefix(value = "logs")
+    public static class Tokenizer implements PlaceTokenizer<LogsPlace> {
 
         @Override
-        public GetLogsPlace getPlace(String token) {
-            return new GetLogsPlace();
+        public LogsPlace getPlace(String token) {
+            return new LogsPlace();
         }
 
         @Override
-        public String getToken(GetLogsPlace place) {
+        public String getToken(LogsPlace place) {
             return "";
         }
     }

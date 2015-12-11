@@ -18,7 +18,7 @@ package org.kaaproject.kaa.sandbox.web.client.mvp;
 
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.ChangeKaaHostView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.FilterView;
-import org.kaaproject.kaa.sandbox.web.client.mvp.view.GetLogsView;
+import org.kaaproject.kaa.sandbox.web.client.mvp.view.LogsView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.HeaderView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.MainView;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.ProjectView;
@@ -27,7 +27,7 @@ import org.kaaproject.kaa.sandbox.web.client.mvp.view.header.HeaderViewImpl;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.main.MainViewImpl;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.project.ProjectViewImpl;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.settings.ChangeKaaHostViewImpl;
-import org.kaaproject.kaa.sandbox.web.client.mvp.view.settings.GetLogsViewImpl;
+import org.kaaproject.kaa.sandbox.web.client.mvp.view.settings.LogsViewImpl;
 
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
@@ -48,7 +48,7 @@ public class ClientFactoryImpl implements ClientFactory {
     
     private final ChangeKaaHostView changeKaaHostView = new ChangeKaaHostViewImpl();
 
-    private final GetLogsView getLogsView = new GetLogsViewImpl();
+    private final LogsView getLogsView = new LogsViewImpl();
 
     @Override
     public EventBus getEventBus() {
@@ -86,7 +86,7 @@ public class ClientFactoryImpl implements ClientFactory {
     }
 
     @Override
-    public GetLogsView getGetLogsView() {
+    public LogsView getLogsView() {
         return getLogsView;
     }
 }
