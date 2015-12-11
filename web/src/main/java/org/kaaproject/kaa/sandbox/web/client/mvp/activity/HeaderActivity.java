@@ -112,7 +112,6 @@ public class HeaderActivity extends AbstractActivity {
             @Override
             public void onSuccessImpl(Boolean enabled) {
                 if (enabled) {
-//                    headerView.getHeaderMenuItems().addMenuItem(Utils.constants.getSandboxLogs(), new ActionMenuItemListener() {
                     subMenuItem.addMenuItem(Utils.constants.getSandboxLogs(), new ActionMenuItemListener() {
                         @Override
                         public void onMenuItemSelected() {

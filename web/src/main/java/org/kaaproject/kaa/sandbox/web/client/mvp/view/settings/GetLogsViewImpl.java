@@ -16,6 +16,7 @@
 
 package org.kaaproject.kaa.sandbox.web.client.mvp.view.settings;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -45,12 +46,14 @@ public class GetLogsViewImpl extends BaseViewImpl implements GetLogsView {
         getLogsPanel = new VerticalPanel();
         HTML getLogsLabel = new HTML("Here you can download sandbox logs!");
         getLogsLabel.addStyleName(Utils.sandboxStyle.descriptionLabel());
+        getLogsLabel.getElement().getStyle().setPaddingBottom(20, Style.Unit.PX);
         getLogsPanel.add(getLogsLabel);
 
         getLogsButton = new Button("Get logs");
         getLogsPanel.add(getLogsButton);
 
         detailsPanel.add(getLogsPanel);
+        headerPanel.setVisible(true);
     }
 
     @Override

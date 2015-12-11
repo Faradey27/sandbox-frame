@@ -17,12 +17,11 @@
 package org.kaaproject.kaa.sandbox.web.client.mvp.activity;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.http.client.*;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import org.kaaproject.avro.ui.gwt.client.util.BusyAsyncCallback;
 import org.kaaproject.kaa.sandbox.web.client.Sandbox;
@@ -40,7 +39,7 @@ public class GetLogsActivity extends AbstractActivity{
     private final ClientFactory clientFactory;
     private GetLogsView view;
 
-    private static final String LOG_SERVLET_URL = "/sandbox/servlet/getLogsServlet";
+    private static final String LOG_SERVLET_URL = GWT.getModuleBaseURL() + "servlet/getLogsServlet";
 
 
     private List<HandlerRegistration> registrations = new ArrayList<HandlerRegistration>();
@@ -53,7 +52,6 @@ public class GetLogsActivity extends AbstractActivity{
 
     @Override
     public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-//        Analytics.switchScreen(Analytics.GET_LOGS_ACTION);
         view = clientFactory.getGetLogsView();
         bind(eventBus);
         containerWidget.setWidget(view.asWidget());
@@ -115,18 +113,20 @@ public class GetLogsActivity extends AbstractActivity{
 
     private void getLogs() {
 
-        RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, LOG_SERVLET_URL);
+        Sandbox.redirectToUrl(LOG_SERVLET_URL);
 
-        try {
-            builder.sendRequest(null, new RequestCallback() {
-                @Override
-                public void onResponseReceived(Request request, Response response) {}
-
-                @Override
-                public void onError(Request request, Throwable throwable) {}
-            });
-        } catch (RequestException e) {
-            e.printStackTrace();
-        }
+//        RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, LOG_SERVLET_URL);
+//
+//        try {
+//            builder.sendRequest(null, new RequestCallback() {
+//                @Override
+//                public void onResponseReceived(Request request, Response response) {}
+//
+//                @Override
+//                public void onError(Request request, Throwable throwable) {}
+//            });
+//        } catch (RequestException e) {
+//            e.printStackTrace();
+//        }
     }
 }
