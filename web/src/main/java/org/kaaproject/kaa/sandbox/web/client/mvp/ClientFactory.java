@@ -35,6 +35,4 @@ public interface ClientFactory {
     
     ChangeKaaHostView getChangeKaaHostView();
 
-    LogsView getLogsView();
-
 }

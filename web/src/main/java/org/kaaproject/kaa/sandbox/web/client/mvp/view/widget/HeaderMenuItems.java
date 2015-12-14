@@ -51,12 +51,8 @@ public class HeaderMenuItems extends HorizontalPanel {
     }
     
     public void addMenuItem(String text, final ActionMenuItemListener listener) {
-        addMenuItem(text, false, listener);
-    }
 
-    public ActionsLabel addMenuItem(String text, boolean extensible, final ActionMenuItemListener listener) {
-
-        ActionsLabel item = new ActionsLabel(text, extensible);
+        ActionsLabel item = new ActionsLabel(text, false);
         item.addStyleName(Utils.sandboxStyle.button());
         items.add(item);
 
@@ -74,8 +70,6 @@ public class HeaderMenuItems extends HorizontalPanel {
         collapsedMenu.addMenuItem(text, listener);
 
         updateStyles();
-
-        return item;
     }
     
     private void updateStyles() {

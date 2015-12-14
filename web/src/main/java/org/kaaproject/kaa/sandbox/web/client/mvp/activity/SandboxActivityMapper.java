@@ -18,7 +18,6 @@ package org.kaaproject.kaa.sandbox.web.client.mvp.activity;
 
 import org.kaaproject.kaa.sandbox.web.client.mvp.ClientFactory;
 import org.kaaproject.kaa.sandbox.web.client.mvp.place.ChangeKaaHostPlace;
-import org.kaaproject.kaa.sandbox.web.client.mvp.place.LogsPlace;
 import org.kaaproject.kaa.sandbox.web.client.mvp.place.MainPlace;
 import org.kaaproject.kaa.sandbox.web.client.mvp.place.ProjectPlace;
 
@@ -47,8 +46,6 @@ public class SandboxActivityMapper implements ActivityMapper {
                 return new ProjectActivity((ProjectPlace)place, clientFactory);
             } else if (clazz == ChangeKaaHostPlace.class) {
                 return new ChangeKaaHostActivity((ChangeKaaHostPlace)place, clientFactory);
-            } else if (clazz == LogsPlace.class) {
-                return new LogsActivity((LogsPlace) place, clientFactory);
             }
 
         }

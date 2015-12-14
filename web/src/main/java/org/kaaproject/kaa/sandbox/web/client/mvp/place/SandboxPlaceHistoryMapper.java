@@ -21,8 +21,7 @@ import com.google.gwt.place.shared.WithTokenizers;
 
 @WithTokenizers({MainPlace.Tokenizer.class,
     ProjectPlace.Tokenizer.class,
-    ChangeKaaHostPlace.Tokenizer.class,
-    LogsPlace.Tokenizer.class})
+    ChangeKaaHostPlace.Tokenizer.class})
 public interface SandboxPlaceHistoryMapper extends PlaceHistoryMapper
 {
 }

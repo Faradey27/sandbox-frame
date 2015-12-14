@@ -163,10 +163,6 @@ public class ActionsLabel extends Label {
         menu.clearItems();
     }
 
-    public PopupPanel getActionsPopup() {
-        return actionsPopup;
-    }
-
     public static interface ActionMenuItemListener {
         void onMenuItemSelected();
     }
