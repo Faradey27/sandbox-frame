@@ -22,12 +22,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import org.kaaproject.avro.ui.gwt.client.util.BusyAsyncCallback;
 import org.kaaproject.kaa.sandbox.web.client.Sandbox;
 import org.kaaproject.kaa.sandbox.web.client.mvp.ClientFactory;
 import org.kaaproject.kaa.sandbox.web.client.mvp.place.LogsPlace;
 import org.kaaproject.kaa.sandbox.web.client.mvp.view.LogsView;
+import org.kaaproject.kaa.sandbox.web.client.mvp.view.dialog.ConsoleDialog;
 import org.kaaproject.kaa.sandbox.web.client.util.Analytics;
 import org.kaaproject.kaa.sandbox.web.client.util.Utils;
 
@@ -105,6 +107,28 @@ public class LogsActivity extends AbstractActivity {
 
     private void getLogs() {
         Analytics.sendEvent(Analytics.GET_LOGS_ACTION, "getting logs");
-        Sandbox.redirectToUrl(LOGS_SERVLET_URL);
+
+        ConsoleDialog.startConsoleDialog("Going to create archive with log files", new ConsoleDialog.ConsoleDialogListener() {
+            @Override
+            public void onOk(boolean success) {
+                Sandbox.redirectToUrl(LOGS_SERVLET_URL);
+            }
+
+            @Override
+            public void onStart(String uuid, final ConsoleDialog dialog, final AsyncCallback<Void> callback) {
+                Sandbox.getSandboxService().getLogsArchive(uuid, new AsyncCallback<Void>() {
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+
+                    @Override
+                    public void onSuccess(Void result) {
+                        dialog.appendToConsoleAtFinish("Archive successfully created.\n");
+                        callback.onSuccess(result);
+                    }
+                });
+            }
+        });
     }
 }

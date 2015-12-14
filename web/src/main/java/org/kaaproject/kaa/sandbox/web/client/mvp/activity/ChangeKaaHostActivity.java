@@ -16,9 +16,14 @@
 
 package org.kaaproject.kaa.sandbox.web.client.mvp.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import org.kaaproject.avro.ui.gwt.client.util.BusyAsyncCallback;
 import org.kaaproject.kaa.sandbox.web.client.Sandbox;
 import org.kaaproject.kaa.sandbox.web.client.mvp.ClientFactory;
@@ -29,15 +34,12 @@ import org.kaaproject.kaa.sandbox.web.client.mvp.view.dialog.ConsoleDialog.Conso
 import org.kaaproject.kaa.sandbox.web.client.util.Analytics;
 import org.kaaproject.kaa.sandbox.web.client.util.Utils;
 
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChangeKaaHostActivity extends AbstractActivity {
+
+    private static final String LOGS_SERVLET_URL = GWT.getModuleBaseURL() + "servlet/logsServlet";
 
     private final ChangeKaaHostPlace place;
     private final ClientFactory clientFactory;
@@ -107,6 +109,29 @@ public class ChangeKaaHostActivity extends AbstractActivity {
                         }
                     }
                 });
+
+        Sandbox.getSandboxService().getLogsEnabled(new BusyAsyncCallback<Boolean>() {
+            @Override
+            public void onFailureImpl(Throwable throwable) {
+                String message = Utils.getErrorMessage(throwable);
+                view.setErrorMessage(message);
+                Analytics.sendException(message);
+            }
+
+            @Override
+            public void onSuccessImpl(Boolean enabled) {
+                view.setGetLogsEnabled(enabled);
+                if (enabled) {
+                    registrations.add(view.getGetLogsButton().addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent clickEvent) {
+                            getLogs();
+                        }
+                    }));
+                }
+
+            }
+        });
     }
 
     private void changeKaaHost() {
@@ -143,6 +168,33 @@ public class ChangeKaaHostActivity extends AbstractActivity {
         } else {
             view.setErrorMessage(Utils.messages.emptyKaaHostError());
         }
+    }
+
+    private void getLogs() {
+        Analytics.sendEvent(Analytics.GET_LOGS_ACTION, "getting logs");
+
+        ConsoleDialog.startConsoleDialog("Going to create archive with log files", new ConsoleDialog.ConsoleDialogListener() {
+            @Override
+            public void onOk(boolean success) {
+                Sandbox.redirectToUrl(LOGS_SERVLET_URL);
+            }
+
+            @Override
+            public void onStart(String uuid, final ConsoleDialog dialog, final AsyncCallback<Void> callback) {
+                Sandbox.getSandboxService().getLogsArchive(uuid, new AsyncCallback<Void>() {
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        callback.onFailure(throwable);
+                    }
+
+                    @Override
+                    public void onSuccess(Void result) {
+                        dialog.appendToConsoleAtFinish("Archive successfully created.\n");
+                        callback.onSuccess(result);
+                    }
+                });
+            }
+        });
     }
 
 }

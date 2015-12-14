@@ -27,7 +27,7 @@ import org.kaaproject.kaa.sandbox.web.client.util.Utils;
 
 public class LogsViewImpl extends BaseViewImpl implements LogsView {
 
-    private VerticalPanel getLogsPanel;
+    private VerticalPanel logsPanel;
     private Button getLogsButton;
 
     public LogsViewImpl() {
@@ -43,18 +43,17 @@ public class LogsViewImpl extends BaseViewImpl implements LogsView {
     @Override
     protected void initCenterPanel() {
 
-        getLogsPanel = new VerticalPanel();
-        getLogsPanel.getElement().getStyle().setPaddingTop(20, Style.Unit.PX);
+        logsPanel = new VerticalPanel();
+        logsPanel.getElement().getStyle().setPaddingTop(20, Style.Unit.PX);
         HTML getLogsLabel = new HTML(Utils.messages.getLogsMessage());
         getLogsLabel.addStyleName(Utils.sandboxStyle.descriptionLabel());
         getLogsLabel.getElement().getStyle().setPaddingBottom(20, Style.Unit.PX);
-        getLogsPanel.add(getLogsLabel);
+        logsPanel.add(getLogsLabel);
 
         getLogsButton = new Button(Utils.constants.getLogs());
-        getLogsPanel.add(getLogsButton);
+        logsPanel.add(getLogsButton);
 
-        detailsPanel.add(getLogsPanel);
-        headerPanel.setVisible(true);
+        detailsPanel.add(logsPanel);
     }
 
     @Override
@@ -69,7 +68,8 @@ public class LogsViewImpl extends BaseViewImpl implements LogsView {
 
     @Override
     public void setGetLogsEnabled(Boolean enabled) {
-        getLogsPanel.setVisible(enabled);
+        logsPanel.setVisible(enabled);
+        updateHeaderHeight();
     }
 
 }

@@ -18,7 +18,6 @@ package org.kaaproject.kaa.sandbox.web.servlet;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
-import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.commons.compress.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,23 +26,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
 
 public class LogsServlet extends HttpServlet {
 
     private static final int BYTES_DOWNLOAD = 1024;
 
     private static final String LOG_DIR = "/var/log/kaa/";
-    private static final String ARCHIVE_NAME = "sandbox-logs.tar.gz";
+    private static final String ARCHIVE_NAME = "sandbox_logs.tar.gz";
     private static final String ARCHIVE_LOCATION = "/home/kaa/" + ARCHIVE_NAME;
 
     /** The Constant logger. */
@@ -52,18 +42,21 @@ public class LogsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Path path = Paths.get(LOG_DIR);
-        if (Files.exists(path)) {
-            try (TarArchiveOutputStream out = new TarArchiveOutputStream(new GzipCompressorOutputStream(
-                    new BufferedOutputStream(new FileOutputStream(new File(ARCHIVE_LOCATION)))))) {
-
-                createTarGz(out, LOG_DIR, "");
-                sendArchive(ARCHIVE_LOCATION, response);
-
-            } catch (Exception ex) {
-                logger.error("Unexpected error in LogsServlet.doGet: ", ex);
-                throw new RuntimeException(ex);
-            }
+        File archFile = new File(ARCHIVE_LOCATION);
+//        Path path = Paths.get(LOG_DIR);
+//        if (Files.exists(path)) {
+        if (archFile.exists()) {
+            sendArchive(ARCHIVE_LOCATION, response);
+//            try (TarArchiveOutputStream out = new TarArchiveOutputStream(new GzipCompressorOutputStream(
+//                    new BufferedOutputStream(new FileOutputStream(new File(ARCHIVE_LOCATION)))))) {
+//
+////                createTarGz(out, LOG_DIR, "");
+//                sendArchive(ARCHIVE_LOCATION, response);
+//
+//            } catch (Exception ex) {
+//                logger.error("Unexpected error in LogsServlet.doGet: ", ex);
+//                throw new RuntimeException(ex);
+//            }
         } else {
             logger.error("Unexpected error in LogsServlet.doGet: log directory " + LOG_DIR + "doesn't exists.");
             throw new RuntimeException("Unexpected error in LogsServlet.doGet: log directory " + LOG_DIR + "doesn't exists.");
