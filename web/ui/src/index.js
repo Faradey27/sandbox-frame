@@ -1,3 +1,6 @@
+/* eslint-disable import/no-deprecated */
+/* eslint-disable import/imports-first */
+
 import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -5,8 +8,12 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Root from './containers/Root';
 import configureStore from './store/configureStore';
 
-
-import './styles.less';// eslint-disable-line import/no-deprecated
+import 'nvd3/build/nv.d3.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import './assets/normalize.less';
+import './assets/media.less';
+import './assets/typography.less';
+import './styles.less';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store, {

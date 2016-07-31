@@ -8,6 +8,7 @@ const path = require('path');
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
     './src/index.js',
   ],
@@ -23,12 +24,12 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'React+redux sample',
+      title: 'Example',
       inject: 'body',
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('style.[contentHash].css', {
+    new ExtractTextPlugin('style.css', {
       allChunks: true,
     }),
     new webpack.DefinePlugin({
@@ -46,12 +47,15 @@ module.exports = {
         exclude: /node_modules/,
         include: __dirname,
       },
+      { test: /\.svg/, loader: "url-loader?limit=26000&mimetype=image/svg+xml" },
+      { test: /\.(woff|woff2|ttf|eot)/, loader: "url-loader?limit=1" },
       {
         test: /\.js$/,
-        loader: "eslint-loader?{parser: 'babel-eslint'}",
+        loader: "eslint-loader",
         exclude: /node_modules/,
         include: __dirname,
       },
+      { test: /\.json$/, loader: "json-loader" },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),

@@ -18,7 +18,7 @@ class HeaderTabs extends Component {
     return (
       <div style={styles.base}>
         <FlatButton
-          containerElement={<Link to="/sandbox/managment" />}
+          containerElement={<Link to="/sandbox/management" />}
           label="Managment"
           labelStyle={styles.label}
         />

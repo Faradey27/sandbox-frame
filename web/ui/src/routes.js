@@ -22,11 +22,11 @@ export default (
     />
     <Route
       component={Application}
-      path="/sandbox/:name"
+      path="/sandbox/app/:name"
     />
     <Route
       component={ConfigurationApp}
-      path="/sandbox/:name/:name"
+      path="/sandbox/app/:name/:configName"
     />
   </Route>
 );

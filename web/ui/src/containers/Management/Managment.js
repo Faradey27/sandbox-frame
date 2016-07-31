@@ -1,11 +1,11 @@
 import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Immutable from 'immutable';
 import radium from 'radium';
 import pureRender from 'pure-render-decorator';
 
-import { getFilteredApps } from './../../selectors/apps';
-import { filterApps } from './../../actions/apps';
+import { updateManagement } from './../../actions/management';
+
+import ManageForm from './components/ManageForm';
 
 const styles = {
   base: {
@@ -20,32 +20,18 @@ const styles = {
 @pureRender
 class Managment extends Component {
   static propTypes = {
-    apps: PropTypes.instanceOf(Immutable.Map),
-    filterApps: PropTypes.func.isRequired,
-  }
-
-  componentWillMount() {
-    this.props.filterApps();
-  }
-
-  renderApps() {
-    return null;
+    updateManagement: PropTypes.func.isRequired,
   }
 
   render() {
     return (
       <div style={[styles.base]}>
-        {'Managment'}
-        {this.renderApps()}
+        <ManageForm updateManagement={this.props.updateManagement} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  apps: getFilteredApps(state, props),
-});
-
-export default connect(mapStateToProps, {
-  filterApps,
+export default connect(null, {
+  updateManagement,
 })(Managment);

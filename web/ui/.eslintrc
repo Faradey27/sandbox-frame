@@ -1,5 +1,6 @@
 {
   "extends": "hardcore-react",
+  "parser": "babel-eslint",
   "rules": {
     "import/no-namespace": 0,
     "import/namespace": 0,
@@ -8,8 +9,19 @@
     "import/no-deprecated": 0,
     "import/no-named-as-default": 0,
     "no-negated-condition": 0,
-    "no-console": ["error", { allow: ["warn", "error", "info"] }],
-    "react/prefer-stateless-function": 0
+    "no-console": [1, { allow: ["warn", "error", "info"] }],
+    "react/prefer-stateless-function": 0,
+    "no-restricted-syntax": [
+      2,
+      "DebuggerStatement",
+      "LabeledStatement",
+      "WithStatement",
+    ],
+    "id-length": 0,
+    "react/no-set-state": 0,
+    "react/jsx-no-bind": 0,
+    "no-invalid-this": 0,
+    "no-inline-comments": 0
   },
   "globals": {
     "describe": true,
