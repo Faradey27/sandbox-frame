@@ -1,29 +1,17 @@
-import { Component, PropTypes } from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import { Component } from 'react';
+import PureRender from 'pure-render-decorator';
 
 const styles = {
   base: {},
 };
 
-class FlatButtonWrap extends Component {
-  static propTypes = {
-    action: PropTypes.func,
-    containerElement: PropTypes.node,
-    label: PropTypes.string,
-    style: PropTypes.object,
-  }
-
+@PureRender
+class FlatButton extends Component {
   render() {
     return (
-      <div style={styles.base}>
-        <FlatButton
-          containerElement={this.props.containerElement}
-          label={this.props.label}
-          style={this.props.style}
-        />
-      </div>
+      <div style={styles.base} />
     );
   }
 }
 
-export default FlatButtonWrap;
+export default FlatButton;

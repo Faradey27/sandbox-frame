@@ -1,30 +1,17 @@
-import { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Component } from 'react';
+import PureRender from 'pure-render-decorator';
 
 const styles = {
   base: {},
 };
 
-class RaisedButtonWrap extends Component {
-  static propTypes = {
-    action: PropTypes.func,
-    label: PropTypes.string,
-    style: PropTypes.object,
-    type: PropTypes.string,
-  }
-
+@PureRender
+class RaisedButton extends Component {
   render() {
     return (
-      <div style={styles.base}>
-        <RaisedButton
-          label={this.props.label}
-          secondary
-          style={this.props.style}
-          type={this.props.type}
-        />
-      </div>
+      <div style={styles.base} />
     );
   }
 }
 
-export default RaisedButtonWrap;
+export default RaisedButton;

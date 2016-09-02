@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import PureRender from 'pure-render-decorator';
 import { reduxForm, Field } from 'redux-form/immutable';

@@ -1,29 +1,17 @@
-import { Component, PropTypes } from 'react';
-import Checkbox from 'material-ui/Checkbox';
+import { Component } from 'react';
+import PureRender from 'pure-render-decorator';
 
 const styles = {
   base: {},
 };
 
-class CheckboxWrap extends Component {
-  static propTypes = {
-    input: PropTypes.object,
-    label: PropTypes.string,
-    style: PropTypes.object,
-  }
-
+@PureRender
+class Checkbox extends Component {
   render() {
     return (
-      <div style={styles.base}>
-        <Checkbox
-          checked={this.props.input.checked}
-          label={this.props.input.label}
-          style={this.props.style}
-          onCheck={(e) => this.props.input.onChange(e)}
-        />
-      </div>
+      <div style={styles.base} />
     );
   }
 }
 
-export default CheckboxWrap;
+export default Checkbox;

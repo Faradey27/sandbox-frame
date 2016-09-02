@@ -1,24 +1,15 @@
-import { Component, PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
+import { Component } from 'react';
+import PureRender from 'pure-render-decorator';
 
 const styles = {
   base: {},
 };
 
+@PureRender
 class Input extends Component {
-  static propTypes = {
-    input: PropTypes.object,
-    style: PropTypes.object,
-  }
-
   render() {
     return (
-      <div style={styles.base}>
-        <TextField
-          {...this.props.input}
-          style={this.props.style}
-        />
-      </div>
+      <div style={styles.base} />
     );
   }
 }

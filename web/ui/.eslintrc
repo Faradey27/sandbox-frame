@@ -1,0 +1,10 @@
+{
+  "extends": "hardcore-react",
+  "parser": "babel-eslint",
+  "globals": {
+    "describe": true,
+    "it": true,
+    "path": true,
+    "ga": true
+  }
+}
