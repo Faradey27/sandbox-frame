@@ -5,7 +5,9 @@ import radium from 'radium';
 import pureRender from 'pure-render-decorator';
 
 import { getFilteredApps } from './../../selectors/apps';
-import { filterApps } from './../../actions/apps';
+import { loadApps } from './../../actions/apps';
+
+import AppCard from './../../components/AppCard';
 
 const styles = {
   base: {
@@ -20,22 +22,26 @@ const styles = {
 @pureRender
 class StartPage extends Component {
   static propTypes = {
-    apps: PropTypes.instanceOf(Immutable.Map),
-    filterApps: PropTypes.func.isRequired,
+    apps: PropTypes.instanceOf(Immutable.List),
+    loadApps: PropTypes.func.isRequired,
   }
 
   componentWillMount() {
-    this.props.filterApps();
+    this.props.loadApps();
   }
 
   renderApps() {
-    return null;
+    return this.props.apps.map((app) => (
+      <AppCard
+        app={app}
+        key={app.get('name')}
+      />
+    ));
   }
 
   render() {
     return (
       <div style={[styles.base]}>
-        {'Start page'}
         {this.renderApps()}
       </div>
     );
@@ -47,5 +53,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps, {
-  filterApps,
+  loadApps,
 })(StartPage);

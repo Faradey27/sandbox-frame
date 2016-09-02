@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux-immutablejs';
 import Immutable from 'immutable';
+import { reducer as formReducer } from 'redux-form/immutable';
 
 import routing from './routing';
 import appsView from './appsView';
@@ -16,4 +17,5 @@ export default combineReducers({
   entities,
   appsView,
   routing,
+  form: formReducer,
 });

@@ -1,23 +1,41 @@
 import { CALL_API } from 'redux-api-middleware';
 import { API_URL } from './../constants/Api';
 
-export const DOWNLOAD_SOURCE_START = 'DOWNLOAD_SOURCE_START';
-export const DOWNLOAD_SOURCE_SUCCESS = 'DOWNLOAD_SOURCE_SUCCESS';
-export const DOWNLOAD_SOURCE_FAILURE = 'DOWNLOAD_SOURCE_FAILURE';
+export const LOAD_APPS_START = 'LOAD_APPS_START';
+export const LOAD_APPS_SUCCESS = 'LOAD_APPS_SUCCESS';
+export const LOAD_APPS_FAILURE = 'LOAD_APPS_FAILURE';
 
-const fetchSources = ({ name }) => ({
+const fetchApps = () => ({
   [CALL_API]: {
     types: [
-      DOWNLOAD_SOURCE_START,
-      DOWNLOAD_SOURCE_SUCCESS,
-      DOWNLOAD_SOURCE_FAILURE,
+      LOAD_APPS_START,
+      LOAD_APPS_SUCCESS,
+      LOAD_APPS_FAILURE,
     ],
     method: 'GET',
-    endpoint: `${API_URL}/download/${name}`,
+    endpoint: `${API_URL}/apps`,
   },
 });
 
-export const loadSources = ({ name }) => (dispatch) => dispatch(fetchSources({ name }));
+export const loadApps = () => (dispatch) => dispatch(fetchApps());
+
+export const LOAD_APP_START = 'LOAD_APP_START';
+export const LOAD_APP_SUCCESS = 'LOAD_APP_SUCCESS';
+export const LOAD_APP_FAILURE = 'LOAD_APP_FAILURE';
+
+const fetchApp = ({ name }) => ({
+  [CALL_API]: {
+    types: [
+      { type: LOAD_APP_START, meta: { name } },
+      { type: LOAD_APP_SUCCESS, meta: { name } },
+      { type: LOAD_APP_FAILURE, meta: { name } },
+    ],
+    method: 'GET',
+    endpoint: `${API_URL}/app/${name}`,
+  },
+});
+
+export const loadApp = ({ name }) => (dispatch) => dispatch(fetchApp({ name }));
 
 const FILTER_APPS = 'FILTER_APPS';
 

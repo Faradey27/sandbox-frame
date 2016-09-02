@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
   entry: ['./src/index.js'],
   output: {
-    path: path.resolve(__dirname, 'target/generated-resources/public'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.[hash].js',
   },
@@ -19,7 +19,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'React+redux sample',
+      title: 'Kaa Sandbox',
       inject: 'body',
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -45,6 +45,9 @@ module.exports = {
         exclude: /node_modules/,
         include: __dirname,
       },
+      { test: /\.svg/, loader: "url-loader?limit=26000&mimetype=image/svg+xml" },
+      { test: /\.(woff|woff2|ttf|eot)/, loader: "url-loader?limit=1" },
+      { test: /\.json$/, loader: "json-loader" },
       {
         test: /\.js$/,
         loader: "eslint-loader?{parser: 'babel-eslint'}",
