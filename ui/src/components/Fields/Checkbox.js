@@ -1,17 +1,18 @@
-import { Component } from 'react';
-import PureRender from 'pure-render-decorator';
+/* eslint-disable react/jsx-handler-names */
+import { PropTypes } from 'react';
+import { Checkbox as RawCheckbox } from './rawFields';
 
-const styles = {
-  base: {},
+const Checkbox = ({ input, label }) => (
+  <RawCheckbox
+    checked={Boolean(Checkbox.value)}
+    label={label}
+    onCheck={input.onChange}
+  />
+);
+
+Checkbox.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
 };
-
-@PureRender
-class Checkbox extends Component {
-  render() {
-    return (
-      <div style={styles.base} />
-    );
-  }
-}
 
 export default Checkbox;

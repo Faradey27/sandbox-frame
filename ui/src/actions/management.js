@@ -5,7 +5,7 @@ export const UPDATE_MANAGEMENT_START = 'UPDATE_MANAGEMENT_START';
 export const UPDATE_MANAGEMENT_SUCCESS = 'UPDATE_MANAGEMENT_SUCCESS';
 export const UPDATE_MANAGEMENT_FAILURE = 'UPDATE_MANAGEMENT_FAILURE';
 
-const fetchUpdateManagement = (form) => ({
+const fetchUpdateManagementConfig = (form) => ({
   [CALL_API]: {
     types: [
       UPDATE_MANAGEMENT_START,
@@ -13,9 +13,9 @@ const fetchUpdateManagement = (form) => ({
       UPDATE_MANAGEMENT_FAILURE,
     ],
     method: 'POST',
-    body: JSON.strinfigy(form),
+    body: JSON.strinfigy(form && form.toJS()),
     endpoint: `${API_URL}/app/${name}`,
   },
 });
 
-export const updateManagement = (form) => (dispatch) => dispatch(fetchUpdateManagement(form));
+export const updateManagementConfig = (form) => (dispatch) => dispatch(fetchUpdateManagementConfig(form));

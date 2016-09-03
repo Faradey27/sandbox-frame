@@ -1,5 +1,6 @@
 import InputWrap from './Input';
-import { RaisedButton as RaisedButtonWrap, FlatButton as FlatButtonWrap } from './rawFields';
+import RaisedButtonWrap from './RaisedButton';
+import FlatButtonWrap from './FlatButton';
 import CheckboxWrap from './Checkbox';
 
 export const RaisedButton = RaisedButtonWrap;

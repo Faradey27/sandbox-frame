@@ -14,7 +14,7 @@ const styles = {
 class ManageForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func, // from redux-form
-    updateManagement: PropTypes.func,
+    updateManagementConfig: PropTypes.func,
   };
 
   static contextTypes = {
@@ -27,7 +27,9 @@ class ManageForm extends Component {
   }
 
   submit(form) {
-    console.log(form.toJS(), this.props.updateManagement);
+    if (this.props.updateManagementConfig) {
+      this.props.updateManagementConfig(form);
+    }
   }
 
   render() {
@@ -38,12 +40,7 @@ class ManageForm extends Component {
       <div style={[styles.base]}>
         <form onSubmit={handleSubmit(this.submit)}>
           <Field
-            component={(props) =>
-              <Input
-                {...props}
-                style={styles.input}
-              />
-            }
+            component={Input}
             name="something"
             placeholder={l('Something')}
             style={styles.field}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import radium from 'radium';
 import pureRender from 'pure-render-decorator';
 
-import { updateManagement } from './../../actions/management';
+import { updateManagementConfig } from './../../actions/management';
 
 import ManageForm from './components/ManageForm';
 
@@ -20,18 +20,18 @@ const styles = {
 @pureRender
 class Managment extends Component {
   static propTypes = {
-    updateManagement: PropTypes.func.isRequired,
+    updateManagementConfig: PropTypes.func,
   }
 
   render() {
     return (
       <div style={[styles.base]}>
-        <ManageForm updateManagement={this.props.updateManagement} />
+        <ManageForm updateManagementConfig={this.props.updateManagementConfig} />
       </div>
     );
   }
 }
 
 export default connect(null, {
-  updateManagement,
+  updateManagementConfig,
 })(Managment);

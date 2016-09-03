@@ -1,17 +1,21 @@
-import { Component } from 'react';
-import PureRender from 'pure-render-decorator';
+import { PropTypes } from 'react';
+import { Input as RawInput } from './rawFields';
 
-const styles = {
-  base: {},
+const Input = ({ input, label, type, meta: { touched, error } }) => (
+  <RawInput
+    {...input}
+    error={error}
+    label={label}
+    touched={touched}
+    type={type}
+  />
+);
+
+Input.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  meta: PropTypes.object,
+  type: PropTypes.string,
 };
-
-@PureRender
-class Input extends Component {
-  render() {
-    return (
-      <div style={styles.base} />
-    );
-  }
-}
 
 export default Input;
